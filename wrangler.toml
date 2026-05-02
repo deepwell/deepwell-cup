@@ -1,0 +1,9 @@
+name = "deepwell-cup"
+main = "worker.js"
+compatibility_date = "2026-05-02"
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/nhle/v1", "/nhle/v1/*"]

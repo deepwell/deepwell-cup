@@ -13,6 +13,10 @@ bun run dev
 bun run build
 ```
 
+```bash
+bun run deploy
+```
+
 ## Configuration
 
 | Env variable | Purpose |
@@ -21,7 +25,9 @@ bun run build
 | `VITE_NHL_API_BASE` | NHL JSON base URL (default `/nhle/v1`). The same-origin proxy avoids browser CORS failures. |
 
 The local dev proxy is defined in [`vite.config.ts`](vite.config.ts): requests to `/nhle/*` forward to `api-web.nhle.com`.
-The production Cloudflare Pages proxy lives in [`functions/nhle/v1/_middleware.js`](functions/nhle/v1/_middleware.js).
+The production Cloudflare Worker proxy lives in [`worker.js`](worker.js).
+
+Deploy with `bun run deploy`. The Worker serves the built `dist` assets and proxies `/nhle/v1/*` before falling back to the SPA.
 
 ## Scoring
 
