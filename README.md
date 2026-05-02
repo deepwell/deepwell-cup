@@ -18,9 +18,10 @@ bun run build
 | Env variable | Purpose |
 |--------------|---------|
 | `VITE_SEASON_ID` | Overrides default playoff season id (`20242025` is used when unset). |
-| `VITE_NHL_API_BASE` | NHL JSON base URL (default `https://api-web.nhle.com/v1`). Set to `/nhle/v1` to use the Vite dev proxy if your browser blocks cross-origin requests. |
+| `VITE_NHL_API_BASE` | NHL JSON base URL (default `/nhle/v1`). The same-origin proxy avoids browser CORS failures. |
 
-The proxy is defined in [`vite.config.ts`](vite.config.ts): requests to `/nhle/*` forward to `api-web.nhle.com`.
+The local dev proxy is defined in [`vite.config.ts`](vite.config.ts): requests to `/nhle/*` forward to `api-web.nhle.com`.
+The production Cloudflare Pages proxy lives in [`functions/nhle/v1/_middleware.js`](functions/nhle/v1/_middleware.js).
 
 ## Scoring
 

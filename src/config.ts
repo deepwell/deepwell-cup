@@ -4,9 +4,9 @@ export const PLAYOFF_SEASON_ID =
 
 /**
  * Base URL for NHL API JSON (`https://api-web.nhle.com/v1`).
- * In dev you may set `VITE_NHL_API_BASE=/nhle/v1` to use the Vite proxy and avoid CORS.
+ * Defaults to the same-origin proxy so browsers never call nhle.com directly.
  */
 export function getNhlApiBase(): string {
-  const raw = import.meta.env.VITE_NHL_API_BASE ?? "https://api-web.nhle.com/v1";
+  const raw = import.meta.env.VITE_NHL_API_BASE ?? "/nhle/v1";
   return raw.replace(/\/$/, "");
 }
