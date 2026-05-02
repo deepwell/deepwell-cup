@@ -3,6 +3,8 @@ import { segmentCssVar } from "./colors";
 
 interface Props {
   scores: ParticipantScore[];
+  selectedParticipantIds: Set<string>;
+  onToggleParticipant: (participantId: string) => void;
 }
 
 function visualWeight(points: number): number {
@@ -18,7 +20,11 @@ function lastVisibleSegmentIndex(segments: ScoreSegment[]): number {
   return -1;
 }
 
-export function StandingsChart({ scores }: Props) {
+export function StandingsChart({
+  scores,
+  selectedParticipantIds,
+  onToggleParticipant,
+}: Props) {
   const maxVisual = Math.max(
     1,
     ...scores.map((s) =>
@@ -43,9 +49,21 @@ export function StandingsChart({ scores }: Props) {
           );
           const terminalSegmentIndex = lastVisibleSegmentIndex(row.segments);
           const barScale = maxVisual > 0 ? visualSum / maxVisual : 0;
+          const isSelected = selectedParticipantIds.has(row.participantId);
           return (
             <li key={row.participantId} className="standings-row">
-              <div className="standings-name">{row.displayName}</div>
+              <div className="standings-name">
+                <button
+                  type="button"
+                  className={`standings-name-button ${
+                    isSelected ? "standings-name-button-selected" : ""
+                  }`}
+                  aria-pressed={isSelected}
+                  onClick={() => onToggleParticipant(row.participantId)}
+                >
+                  {row.displayName}
+                </button>
+              </div>
               <div className="standings-bar-wrap">
                 <div
                   className="standings-bar"

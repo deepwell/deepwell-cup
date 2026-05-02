@@ -39,6 +39,9 @@ export default function App() {
   const [selectedRound, setSelectedRound] = useState<PlayoffRoundId>(
     rounds[0] ?? "round1",
   );
+  const [selectedParticipantIds, setSelectedParticipantIds] = useState(
+    () => new Set<string>(),
+  );
 
   const [playoffState, setPlayoffState] = useState<NormalizedPlayoffState | null>(
     null,
@@ -109,6 +112,25 @@ export default function App() {
     return teams;
   }, [playoffState]);
 
+  const visibleParticipants = useMemo(() => {
+    if (selectedParticipantIds.size === 0) return predictions.participants;
+    return predictions.participants.filter((p) =>
+      selectedParticipantIds.has(p.id),
+    );
+  }, [selectedParticipantIds]);
+
+  function toggleParticipant(participantId: string) {
+    setSelectedParticipantIds((current) => {
+      const next = new Set(current);
+      if (next.has(participantId)) {
+        next.delete(participantId);
+      } else {
+        next.add(participantId);
+      }
+      return next;
+    });
+  }
+
   return (
     <div className="app">
       <header className="hero">
@@ -136,14 +158,18 @@ export default function App() {
 
       {playoffState && (
         <>
-          <StandingsChart scores={scores} />
+          <StandingsChart
+            scores={scores}
+            selectedParticipantIds={selectedParticipantIds}
+            onToggleParticipant={toggleParticipant}
+          />
           <RoundTabs
             rounds={rounds}
             selected={selectedRound}
             onSelect={setSelectedRound}
           />
           <PicksPanel
-            participants={predictions.participants}
+            participants={visibleParticipants}
             round={selectedRound}
             seriesResults={seriesResults}
             eliminatedTeams={eliminatedTeams}

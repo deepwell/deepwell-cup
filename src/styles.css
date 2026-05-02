@@ -131,6 +131,30 @@ code {
   font-weight: 600;
 }
 
+.standings-name-button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  padding: 0.15rem 0.35rem;
+  margin: -0.15rem -0.35rem;
+  text-align: left;
+}
+
+.standings-name-button:hover,
+.standings-name-button:focus-visible {
+  background: #1e3a5f;
+  outline: none;
+}
+
+.standings-name-button-selected {
+  background: var(--accent);
+  color: white;
+}
+
 .standings-bar-wrap {
   background: #111827;
   border-radius: 8px;
