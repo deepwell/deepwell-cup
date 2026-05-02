@@ -1,0 +1,116 @@
+{
+  "seasonId": "20242025",
+  "participants": [
+    {
+      "id": "alex",
+      "displayName": "Alex Kim",
+      "easternConferenceChampion": "TOR",
+      "westernConferenceChampion": "EDM",
+      "stanleyCupChampion": "TOR",
+      "rounds": [
+        {
+          "round": "round1",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "TOR", "gamesPredicted": 6 },
+            { "seriesLetter": "b", "winnerTeamAbbr": "FLA", "gamesPredicted": 5 },
+            { "seriesLetter": "c", "winnerTeamAbbr": "CAR", "gamesPredicted": 7 },
+            { "seriesLetter": "d", "winnerTeamAbbr": "NYR", "gamesPredicted": 6 }
+          ]
+        },
+        {
+          "round": "round2",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "TOR", "gamesPredicted": 6 },
+            { "seriesLetter": "b", "winnerTeamAbbr": "FLA", "gamesPredicted": 7 }
+          ]
+        },
+        {
+          "round": "round3",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "TOR", "gamesPredicted": 6 }
+          ]
+        },
+        {
+          "round": "round4",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "TOR", "gamesPredicted": 6 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sam",
+      "displayName": "Sam Rivera",
+      "easternConferenceChampion": "FLA",
+      "westernConferenceChampion": "DAL",
+      "stanleyCupChampion": "DAL",
+      "rounds": [
+        {
+          "round": "round1",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "OTT", "gamesPredicted": 7 },
+            { "seriesLetter": "b", "winnerTeamAbbr": "TBL", "gamesPredicted": 6 },
+            { "seriesLetter": "c", "winnerTeamAbbr": "CAR", "gamesPredicted": 5 },
+            { "seriesLetter": "d", "winnerTeamAbbr": "NYI", "gamesPredicted": 7 }
+          ]
+        },
+        {
+          "round": "round2",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "FLA", "gamesPredicted": 5 },
+            { "seriesLetter": "b", "winnerTeamAbbr": "TBL", "gamesPredicted": 6 }
+          ]
+        },
+        {
+          "round": "round3",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "FLA", "gamesPredicted": 7 }
+          ]
+        },
+        {
+          "round": "round4",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "DAL", "gamesPredicted": 7 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jordan",
+      "displayName": "Jordan Lee",
+      "easternConferenceChampion": "CAR",
+      "westernConferenceChampion": "VGK",
+      "stanleyCupChampion": "VGK",
+      "rounds": [
+        {
+          "round": "round1",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "TOR", "gamesPredicted": 5 },
+            { "seriesLetter": "b", "winnerTeamAbbr": "FLA", "gamesPredicted": 6 },
+            { "seriesLetter": "c", "winnerTeamAbbr": "COL", "gamesPredicted": 6 },
+            { "seriesLetter": "d", "winnerTeamAbbr": "WSH", "gamesPredicted": 7 }
+          ]
+        },
+        {
+          "round": "round2",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "CAR", "gamesPredicted": 6 },
+            { "seriesLetter": "b", "winnerTeamAbbr": "VGK", "gamesPredicted": 5 }
+          ]
+        },
+        {
+          "round": "round3",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "VGK", "gamesPredicted": 6 }
+          ]
+        },
+        {
+          "round": "round4",
+          "series": [
+            { "seriesLetter": "a", "winnerTeamAbbr": "VGK", "gamesPredicted": 5 }
+          ]
+        }
+      ]
+    }
+  ]
+}
