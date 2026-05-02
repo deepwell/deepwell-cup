@@ -10,6 +10,7 @@ import type {
   PlayoffRoundId,
   ResolvedSeries,
 } from "./domain/types";
+import { matchupPairKey } from "./domain/matchupKey";
 import { scoreAllParticipants } from "./domain/scoring";
 
 function uniqueRounds(ids: PlayoffRoundId[]): PlayoffRoundId[] {
@@ -84,7 +85,12 @@ export default function App() {
     const m = new Map<string, ResolvedSeries>();
     if (!playoffState) return m;
     for (const s of playoffState.series) {
-      m.set(`${s.roundNumber}:${s.seriesLetter.toLowerCase()}`, s);
+      if (s.homeAbbrev && s.awayAbbrev) {
+        m.set(
+          matchupPairKey(s.roundNumber, s.homeAbbrev, s.awayAbbrev),
+          s,
+        );
+      }
     }
     return m;
   }, [playoffState]);

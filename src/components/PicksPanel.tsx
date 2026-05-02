@@ -3,6 +3,8 @@ import type {
   PlayoffRoundId,
   ResolvedSeries,
 } from "../domain/types";
+import { matchupPairKey } from "../domain/matchupKey";
+import { normalizeAbbr } from "../domain/teamConference";
 import { PLAYOFF_ROUND_LABEL } from "../uiConstants";
 
 interface Props {
@@ -11,8 +13,11 @@ interface Props {
   seriesResults: Map<string, ResolvedSeries>;
 }
 
-function seriesKey(roundNum: number, letter: string): string {
-  return `${roundNum}:${letter.toLowerCase()}`;
+function matchupLabel(teamA: string, teamB: string): string {
+  const [x, y] = [normalizeAbbr(teamA), normalizeAbbr(teamB)].sort((a, b) =>
+    a.localeCompare(b),
+  );
+  return `${x} vs ${y}`;
 }
 
 export function PicksPanel({
@@ -57,17 +62,20 @@ export function PicksPanel({
               ) : (
                 <ul className="pick-list">
                   {picks.map((s) => {
-                    const res = seriesResults.get(
-                      seriesKey(roundNum, s.seriesLetter),
+                    const mk = matchupPairKey(
+                      roundNum,
+                      s.matchupTeams[0],
+                      s.matchupTeams[1],
                     );
+                    const res = seriesResults.get(mk);
                     const outcome =
                       res?.winnerAbbrev && res.gamesPlayed
                         ? `${res.winnerAbbrev} in ${res.gamesPlayed}`
                         : "pending";
                     return (
-                      <li key={`${p.id}-${s.seriesLetter}`}>
+                      <li key={`${p.id}-${mk}`}>
                         <span className="series-id">
-                          Series {s.seriesLetter.toUpperCase()}
+                          {matchupLabel(s.matchupTeams[0], s.matchupTeams[1])}
                         </span>
                         <span>
                           {s.winnerTeamAbbr} in {s.gamesPredicted}

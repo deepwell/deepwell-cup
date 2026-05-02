@@ -2,8 +2,11 @@
 export type PlayoffRoundId = "round1" | "round2" | "round3" | "round4";
 
 export interface SeriesPick {
-  /** Lowercase series letter used by NHL URLs (`a` … `p`) */
-  seriesLetter: string;
+  /**
+   * The two teams in this series (order does not matter).
+   * Use the same abbreviations as `api-web.nhle.com` (e.g. UTA, LAK).
+   */
+  matchupTeams: [string, string];
   winnerTeamAbbr: string;
   /** Predicted length of the series in games (4–7) */
   gamesPredicted: number;

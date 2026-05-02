@@ -7,6 +7,7 @@ import {
 } from "./types";
 import { normalizeAbbr } from "./teamConference";
 import { deepestRoundReached } from "./playoffDerived";
+import { matchupPairKey } from "./matchupKey";
 
 function seriesScorePoints(correctTeam: boolean, c: number, p: number): number {
   if (correctTeam) {
@@ -41,17 +42,28 @@ export function scoreParticipant(
 ): ParticipantScore {
   const segments: ScoreSegment[] = [];
 
-  const seriesIndex = new Map<string, (typeof state.series)[number]>();
+  const seriesByMatchup = new Map<string, (typeof state.series)[number]>();
   for (const s of state.series) {
-    seriesIndex.set(`${s.roundNumber}:${s.seriesLetter.toLowerCase()}`, s);
+    if (s.homeAbbrev && s.awayAbbrev) {
+      const mk = matchupPairKey(s.roundNumber, s.homeAbbrev, s.awayAbbrev);
+      seriesByMatchup.set(mk, s);
+    }
   }
 
   for (const rp of participant.rounds) {
     const rn = roundIdToNumber(rp.round);
     for (const pick of rp.series) {
-      const key = `${rn}:${pick.seriesLetter.toLowerCase()}`;
-      const resolved = seriesIndex.get(key);
-      const labelBase = `${roundLabel(rn)} · Series ${pick.seriesLetter.toUpperCase()}`;
+      const mk = matchupPairKey(
+        rn,
+        pick.matchupTeams[0],
+        pick.matchupTeams[1],
+      );
+      const resolved = seriesByMatchup.get(mk);
+      const [x, y] = [
+        normalizeAbbr(pick.matchupTeams[0]),
+        normalizeAbbr(pick.matchupTeams[1]),
+      ].sort((a, b) => a.localeCompare(b));
+      const labelBase = `${roundLabel(rn)} · ${x} vs ${y}`;
 
       if (
         !resolved?.winnerAbbrev ||

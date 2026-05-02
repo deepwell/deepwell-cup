@@ -1,6 +1,6 @@
 # NHL Playoff Picks Dashboard
 
-React + TypeScript + Vite app designed for **Bun**. Static bracket picks live in [`src/data/predictions.json`](src/data/predictions.json). Live playoff structure and scores are loaded from **`api-web.nhle.com`**.
+React + TypeScript + Vite app designed for **Bun**. Static bracket picks live in [`src/data/predictions.json`](src/data/predictions.json). Each series pick identifies the matchup with **`matchupTeams`** (two team abbreviations; order does not matter). That matches NHL carousel data regardless of series letter (`a`, `b`, …). Live playoff structure and scores are loaded from **`api-web.nhle.com`**.
 
 ## Scripts
 

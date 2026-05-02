@@ -84,13 +84,18 @@ function parseSeriesEntry(
   const letter = String(letterRaw).toLowerCase().trim();
   if (!letter) return null;
 
-  const away = seriesObj.awayTeam;
-  const home = seriesObj.homeTeam;
+  /** Playoff carousel uses `topSeed` / `bottomSeed`; other feeds use `homeTeam` / `awayTeam`. */
+  const away = seriesObj.awayTeam ?? seriesObj.bottomSeed;
+  const home = seriesObj.homeTeam ?? seriesObj.topSeed;
   const awayAbbrev = abbrevFromTeamNode(away);
   const homeAbbrev = abbrevFromTeamNode(home);
 
   const awayWins = num(asRecord(away)?.wins ?? asRecord(away)?.seriesWins);
   const homeWins = num(asRecord(home)?.wins ?? asRecord(home)?.seriesWins);
+
+  const winningTeamIdRaw = seriesObj.winningTeamId;
+  const winningTeamId =
+    typeof winningTeamIdRaw === "number" ? winningTeamIdRaw : NaN;
 
   const title =
     typeof seriesObj.seriesTitle === "string"
@@ -128,14 +133,34 @@ function parseSeriesEntry(
     statusNum === 3 ||
     statusNum === 4;
 
+  const sumWins = awayWins + homeWins;
+  if (sumWins > 0) {
+    gamesPlayed = sumWins;
+  }
+
+  function abbrevForTeamId(id: number): string | null {
+    const ar = asRecord(away);
+    const hr = asRecord(home);
+    if (ar && num(ar.id) === id) return abbrevFromTeamNode(away);
+    if (hr && num(hr.id) === id) return abbrevFromTeamNode(home);
+    return null;
+  }
+
+  if (
+    !winnerAbbrev &&
+    !Number.isNaN(winningTeamId) &&
+    winningTeamId > 0
+  ) {
+    winnerAbbrev = abbrevForTeamId(winningTeamId);
+  }
+
   if (awayAbbrev && homeAbbrev && (decidedByWins || decidedByStatus)) {
     if (!winnerAbbrev) {
       if (awayWins !== homeWins) {
         winnerAbbrev = awayWins > homeWins ? awayAbbrev : homeAbbrev;
       }
     }
-    gamesPlayed = awayWins + homeWins;
-    if (gamesPlayed <= 0) gamesPlayed = null;
+    if (gamesPlayed != null && gamesPlayed <= 0) gamesPlayed = null;
   }
 
   return {

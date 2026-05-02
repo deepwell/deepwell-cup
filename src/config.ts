@@ -1,6 +1,6 @@
 /** NHL season id per api-web (e.g. 20242025). Override with `VITE_SEASON_ID`. */
 export const PLAYOFF_SEASON_ID =
-  import.meta.env.VITE_SEASON_ID ?? "20242025";
+  import.meta.env.VITE_SEASON_ID ?? "20252026";
 
 /**
  * Base URL for NHL API JSON (`https://api-web.nhle.com/v1`).
