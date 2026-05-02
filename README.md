@@ -1,6 +1,6 @@
 # NHL Playoff Picks Dashboard
 
-React + TypeScript + Vite app designed for **Bun**. Static bracket picks live in [`src/data/predictions.json`](src/data/predictions.json). Each series pick identifies the matchup with **`matchupTeams`** (two team abbreviations; order does not matter). That matches NHL carousel data regardless of series letter (`a`, `b`, …). Live playoff structure and scores are loaded from **`api-web.nhle.com`**.
+React + TypeScript + Vite app designed for **Bun**. Each series pick identifies the matchup with **`matchupTeams`** (two team abbreviations; order does not matter). That matches NHL carousel data regardless of series letter (`a`, `b`, …). Live playoff structure and scores are loaded from **`api-web.nhle.com`**.
 
 ## Scripts
 
@@ -26,3 +26,7 @@ The proxy is defined in [`vite.config.ts`](vite.config.ts): requests to `/nhle/*
 
 - **Series:** correct winner `15 − 2·|C − P|`; wrong winner `C + P − 8` when the series is completed (C = actual games, P = predicted games).
 - **Conference / Cup preseason picks:** `2·(R − 1)` when the picked team’s deepest playoff round **R** is greater than 1, else `0`.
+
+## Static Data
+
+Static bracket picks live in [`src/data/predictions.json`](src/data/predictions.json).
