@@ -152,6 +152,11 @@ code {
   min-width: 0;
 }
 
+.standings-seg-terminal {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
 .standings-total {
   text-align: right;
   font-variant-numeric: tabular-nums;

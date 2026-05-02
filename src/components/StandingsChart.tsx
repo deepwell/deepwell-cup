@@ -9,6 +9,15 @@ function visualWeight(points: number): number {
   return Math.max(0, points);
 }
 
+function lastVisibleSegmentIndex(segments: ScoreSegment[]): number {
+  for (let i = segments.length - 1; i >= 0; i -= 1) {
+    if (visualWeight(segments[i].points) > 0) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 export function StandingsChart({ scores }: Props) {
   const maxVisual = Math.max(
     1,
@@ -32,6 +41,7 @@ export function StandingsChart({ scores }: Props) {
             (acc, seg) => acc + visualWeight(seg.points),
             0,
           );
+          const terminalSegmentIndex = lastVisibleSegmentIndex(row.segments);
           const barScale = maxVisual > 0 ? visualSum / maxVisual : 0;
           return (
             <li key={row.participantId} className="standings-row">
@@ -48,6 +58,7 @@ export function StandingsChart({ scores }: Props) {
                     <StandingsSegment
                       key={`${row.participantId}-${idx}-${seg.label}`}
                       segment={seg}
+                      isTerminal={idx === terminalSegmentIndex}
                     />
                   ))}
                 </div>
@@ -67,11 +78,17 @@ export function StandingsChart({ scores }: Props) {
   );
 }
 
-function StandingsSegment({ segment }: { segment: ScoreSegment }) {
+function StandingsSegment({
+  segment,
+  isTerminal,
+}: {
+  segment: ScoreSegment;
+  isTerminal: boolean;
+}) {
   const w = visualWeight(segment.points);
   return (
     <div
-      className="standings-seg"
+      className={`standings-seg ${isTerminal ? "standings-seg-terminal" : ""}`}
       style={{
         flexGrow: w > 0 ? w : 0,
         flexBasis: 0,
