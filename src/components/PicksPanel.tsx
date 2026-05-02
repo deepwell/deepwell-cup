@@ -11,19 +11,36 @@ interface Props {
   participants: Participant[];
   round: PlayoffRoundId;
   seriesResults: Map<string, ResolvedSeries>;
+  eliminatedTeams: Set<string>;
 }
 
-function matchupLabel(teamA: string, teamB: string): string {
+function matchupTeams(teamA: string, teamB: string): [string, string] {
   const [x, y] = [normalizeAbbr(teamA), normalizeAbbr(teamB)].sort((a, b) =>
     a.localeCompare(b),
   );
-  return `${x} vs ${y}`;
+  return [x, y];
+}
+
+function TeamAbbr({
+  team,
+  eliminatedTeams,
+}: {
+  team: string;
+  eliminatedTeams: Set<string>;
+}) {
+  const normalized = normalizeAbbr(team);
+  return (
+    <span className={eliminatedTeams.has(normalized) ? "team-eliminated" : ""}>
+      {normalized}
+    </span>
+  );
 }
 
 export function PicksPanel({
   participants,
   round,
   seriesResults,
+  eliminatedTeams,
 }: Props) {
   const roundNum =
     round === "round1"
@@ -47,13 +64,31 @@ export function PicksPanel({
                 <h3>{p.displayName}</h3>
                 <ul className="champs-inline">
                   <li>
-                    East: <strong>{p.easternConferenceChampion}</strong>
+                    East:{" "}
+                    <strong>
+                      <TeamAbbr
+                        team={p.easternConferenceChampion}
+                        eliminatedTeams={eliminatedTeams}
+                      />
+                    </strong>
                   </li>
                   <li>
-                    West: <strong>{p.westernConferenceChampion}</strong>
+                    West:{" "}
+                    <strong>
+                      <TeamAbbr
+                        team={p.westernConferenceChampion}
+                        eliminatedTeams={eliminatedTeams}
+                      />
+                    </strong>
                   </li>
                   <li>
-                    Cup: <strong>{p.stanleyCupChampion}</strong>
+                    Cup:{" "}
+                    <strong>
+                      <TeamAbbr
+                        team={p.stanleyCupChampion}
+                        eliminatedTeams={eliminatedTeams}
+                      />
+                    </strong>
                   </li>
                 </ul>
               </header>
@@ -68,20 +103,43 @@ export function PicksPanel({
                       s.matchupTeams[1],
                     );
                     const res = seriesResults.get(mk);
-                    const outcome =
-                      res?.winnerAbbrev && res.gamesPlayed
-                        ? `${res.winnerAbbrev} in ${res.gamesPlayed}`
-                        : "pending";
+                    const [teamA, teamB] = matchupTeams(
+                      s.matchupTeams[0],
+                      s.matchupTeams[1],
+                    );
                     return (
                       <li key={`${p.id}-${mk}`}>
                         <span className="series-id">
-                          {matchupLabel(s.matchupTeams[0], s.matchupTeams[1])}
+                          <TeamAbbr
+                            team={teamA}
+                            eliminatedTeams={eliminatedTeams}
+                          />{" "}
+                          vs{" "}
+                          <TeamAbbr
+                            team={teamB}
+                            eliminatedTeams={eliminatedTeams}
+                          />
                         </span>
                         <span>
-                          {s.winnerTeamAbbr} in {s.gamesPredicted}
+                          <TeamAbbr
+                            team={s.winnerTeamAbbr}
+                            eliminatedTeams={eliminatedTeams}
+                          />{" "}
+                          in {s.gamesPredicted}
                         </span>
                         <span className="muted small">
-                          Actual: {outcome}
+                          Actual:{" "}
+                          {res?.winnerAbbrev && res.gamesPlayed ? (
+                            <>
+                              <TeamAbbr
+                                team={res.winnerAbbrev}
+                                eliminatedTeams={eliminatedTeams}
+                              />{" "}
+                              in {res.gamesPlayed}
+                            </>
+                          ) : (
+                            "pending"
+                          )}
                         </span>
                       </li>
                     );

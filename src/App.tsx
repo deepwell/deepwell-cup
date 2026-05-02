@@ -12,6 +12,7 @@ import type {
 } from "./domain/types";
 import { matchupPairKey } from "./domain/matchupKey";
 import { scoreAllParticipants } from "./domain/scoring";
+import { normalizeAbbr } from "./domain/teamConference";
 
 function uniqueRounds(ids: PlayoffRoundId[]): PlayoffRoundId[] {
   return Array.from(new Set(ids)).sort((a, b) => {
@@ -95,6 +96,19 @@ export default function App() {
     return m;
   }, [playoffState]);
 
+  const eliminatedTeams = useMemo(() => {
+    const teams = new Set<string>();
+    if (!playoffState) return teams;
+    for (const s of playoffState.series) {
+      if (!s.winnerAbbrev || !s.homeAbbrev || !s.awayAbbrev) continue;
+      const winner = normalizeAbbr(s.winnerAbbrev);
+      const eliminated =
+        normalizeAbbr(s.homeAbbrev) === winner ? s.awayAbbrev : s.homeAbbrev;
+      teams.add(normalizeAbbr(eliminated));
+    }
+    return teams;
+  }, [playoffState]);
+
   return (
     <div className="app">
       <header className="hero">
@@ -132,6 +146,7 @@ export default function App() {
             participants={predictions.participants}
             round={selectedRound}
             seriesResults={seriesResults}
+            eliminatedTeams={eliminatedTeams}
           />
         </>
       )}
