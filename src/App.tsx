@@ -164,11 +164,6 @@ export default function App() {
             )}
           </button>
         </div>
-        <p className="muted">
-          Static picks from{" "}
-          <code>src/data/predictions.json</code> · Live results from{" "}
-          <code>api-web.nhle.com</code> · Season <strong>{seasonId}</strong>
-        </p>
         {loading && <p className="status loading">Loading playoff data…</p>}
         {error && (
           <p className="status error" role="alert">

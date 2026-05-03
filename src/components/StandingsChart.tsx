@@ -34,12 +34,10 @@ export function StandingsChart({
 
   return (
     <section className="panel standings">
-      <h2>Points</h2>
+      <h2>Point Leaders</h2>
       <p className="muted small">
         Bar segments show contributions by round (series picks) and
-        championship picks (East / West / Cup depth bonus). Segment widths use
-        positive points only; totals include negatives from the wrong-team
-        formula.
+        championship picks (East / West / Cup depth bonus).
       </p>
       <ul className="standings-list">
         {scores.map((row) => {
