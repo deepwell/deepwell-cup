@@ -1,5 +1,5 @@
 :root {
-  color-scheme: dark light;
+  color-scheme: dark;
   --bg: #0f1419;
   --surface: #1a2332;
   --border: #2a3648;
@@ -7,6 +7,10 @@
   --muted: #9aacbf;
   --accent: #3d8bfd;
   --error: #f87171;
+  --code-bg: #111827;
+  --hover-bg: #1e3a5f;
+  --bar-bg: #111827;
+  --card-bg: #121a26;
   --seg-r1: #60a5fa;
   --seg-r2: #34d399;
   --seg-r3: #fbbf24;
@@ -28,6 +32,21 @@
   color: var(--text);
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --border: #d4dce8;
+  --text: #172033;
+  --muted: #5f6f85;
+  --accent: #2563eb;
+  --error: #b91c1c;
+  --code-bg: #e9eef7;
+  --hover-bg: #dbeafe;
+  --bar-bg: #e5ebf5;
+  --card-bg: #f8fafc;
+}
+
 *,
 *::before,
 *::after {
@@ -37,11 +56,12 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background: var(--bg);
 }
 
 code {
   font-size: 0.9em;
-  background: #111827;
+  background: var(--code-bg);
   padding: 0.1em 0.35em;
   border-radius: 4px;
 }
@@ -55,6 +75,36 @@ code {
 .hero h1 {
   margin: 0 0 0.35rem;
   font-size: 1.75rem;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: var(--accent);
+  outline: none;
 }
 
 .muted {
@@ -109,7 +159,7 @@ code {
 
 .tab-active {
   border-color: var(--accent);
-  background: #1e3a5f;
+  background: var(--hover-bg);
 }
 
 /* Standings */
@@ -146,7 +196,7 @@ code {
 
 .standings-name-button:hover,
 .standings-name-button:focus-visible {
-  background: #1e3a5f;
+  background: var(--hover-bg);
   outline: none;
 }
 
@@ -156,7 +206,7 @@ code {
 }
 
 .standings-bar-wrap {
-  background: #111827;
+  background: var(--bar-bg);
   border-radius: 8px;
   height: 28px;
   overflow: hidden;
@@ -194,6 +244,10 @@ code {
 @media (max-width: 600px) {
   .app {
     padding: 1rem 0.75rem 2rem;
+  }
+
+  .hero-top {
+    align-items: flex-start;
   }
 
   .panel {
@@ -264,7 +318,7 @@ code {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.85rem 1rem;
-  background: #121a26;
+  background: var(--card-bg);
 }
 
 .pick-card-head h3 {

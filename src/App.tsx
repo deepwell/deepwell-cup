@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 import { fetchNormalizedPlayoffState, NhlApiError } from "./api/nhl";
 import { PicksPanel } from "./components/PicksPanel";
 import { RoundTabs } from "./components/RoundTabs";
@@ -14,6 +15,8 @@ import { matchupPairKey } from "./domain/matchupKey";
 import { scoreAllParticipants } from "./domain/scoring";
 import { normalizeAbbr } from "./domain/teamConference";
 
+type ThemeMode = "dark" | "light";
+
 function uniqueRounds(ids: PlayoffRoundId[]): PlayoffRoundId[] {
   return Array.from(new Set(ids)).sort((a, b) => {
     const order: PlayoffRoundId[] = [
@@ -28,6 +31,10 @@ function uniqueRounds(ids: PlayoffRoundId[]): PlayoffRoundId[] {
 
 export default function App() {
   const seasonId = predictions.seasonId ?? PLAYOFF_SEASON_ID;
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    if (typeof window === "undefined") return "light";
+    return window.localStorage.getItem("theme") === "dark" ? "dark" : "light";
+  });
 
   const rounds = useMemo(() => {
     const ids = predictions.participants.flatMap((p) =>
@@ -48,6 +55,11 @@ export default function App() {
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     let cancelled = false;
@@ -134,7 +146,24 @@ export default function App() {
   return (
     <div className="app">
       <header className="hero">
-        <h1>NHL Playoff Picks</h1>
+        <div className="hero-top">
+          <h1>NHL Playoff Picks</h1>
+          <button
+            type="button"
+            className="theme-toggle"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            onClick={() =>
+              setTheme((current) => (current === "dark" ? "light" : "dark"))
+            }
+          >
+            {theme === "dark" ? (
+              <Sun aria-hidden="true" size={18} strokeWidth={2.25} />
+            ) : (
+              <Moon aria-hidden="true" size={18} strokeWidth={2.25} />
+            )}
+          </button>
+        </div>
         <p className="muted">
           Static picks from{" "}
           <code>src/data/predictions.json</code> · Live results from{" "}
