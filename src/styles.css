@@ -191,6 +191,46 @@ code {
   color: var(--error);
 }
 
+@media (max-width: 600px) {
+  .app {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .panel {
+    padding: 0.9rem 0.75rem;
+  }
+
+  .standings-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name total"
+      "bar bar";
+    gap: 0.35rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .standings-name {
+    grid-area: name;
+    min-width: 0;
+  }
+
+  .standings-name-button {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .standings-bar-wrap {
+    grid-area: bar;
+    width: 100%;
+  }
+
+  .standings-total {
+    grid-area: total;
+  }
+}
+
 .legend {
   display: flex;
   flex-wrap: wrap;
