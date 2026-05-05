@@ -2,6 +2,7 @@ import type {
   Participant,
   PlayoffRoundId,
   ResolvedSeries,
+  SeriesPick,
 } from "../domain/types";
 import { matchupPairKey } from "../domain/matchupKey";
 import { normalizeAbbr } from "../domain/teamConference";
@@ -33,6 +34,69 @@ function TeamAbbr({
     <span className={eliminatedTeams.has(normalized) ? "team-eliminated" : ""}>
       {normalized}
     </span>
+  );
+}
+
+function isSeriesDecided(res: ResolvedSeries | undefined): res is ResolvedSeries {
+  return Boolean(
+    res?.winnerAbbrev &&
+      res.gamesPlayed != null &&
+      res.gamesPlayed > 0,
+  );
+}
+
+function ResolvedPickLine({
+  pick,
+  result,
+  eliminatedTeams,
+}: {
+  pick: SeriesPick;
+  result: ResolvedSeries;
+  eliminatedTeams: Set<string>;
+}) {
+  const pickWon =
+    normalizeAbbr(pick.winnerTeamAbbr) ===
+    normalizeAbbr(result.winnerAbbrev!);
+  const gamesOk = pick.gamesPredicted === result.gamesPlayed!;
+  const winner = result.winnerAbbrev!;
+
+  if (pickWon && gamesOk) {
+    return (
+      <span className="pick-mark-correct">
+        <TeamAbbr team={pick.winnerTeamAbbr} eliminatedTeams={eliminatedTeams} />{" "}
+        in {result.gamesPlayed}
+      </span>
+    );
+  }
+
+  const teamPart = pickWon ? (
+    <span className="pick-mark-correct">
+      <TeamAbbr team={pick.winnerTeamAbbr} eliminatedTeams={eliminatedTeams} />
+    </span>
+  ) : (
+    <>
+      <span className="pick-struck">
+        <TeamAbbr team={pick.winnerTeamAbbr} eliminatedTeams={eliminatedTeams} />
+      </span>{" "}
+      <span className="pick-outcome-plain">
+        <TeamAbbr team={winner} eliminatedTeams={eliminatedTeams} />
+      </span>
+    </>
+  );
+
+  const gamesPart = gamesOk ? (
+    <span className="pick-mark-correct">{result.gamesPlayed}</span>
+  ) : (
+    <>
+      <span className="pick-struck">{pick.gamesPredicted}</span>{" "}
+      <span className="pick-outcome-plain">{result.gamesPlayed}</span>
+    </>
+  );
+
+  return (
+    <>
+      {teamPart} in {gamesPart}
+    </>
   );
 }
 
@@ -120,27 +184,26 @@ export function PicksPanel({
                             eliminatedTeams={eliminatedTeams}
                           />
                         </span>
-                        <span>
-                          <TeamAbbr
-                            team={s.winnerTeamAbbr}
-                            eliminatedTeams={eliminatedTeams}
-                          />{" "}
-                          in {s.gamesPredicted}
-                        </span>
-                        <span className="muted small">
-                          Actual:{" "}
-                          {res?.winnerAbbrev && res.gamesPlayed ? (
-                            <>
+                        {isSeriesDecided(res) ? (
+                          <span className="pick-resolution">
+                            <ResolvedPickLine
+                              pick={s}
+                              result={res}
+                              eliminatedTeams={eliminatedTeams}
+                            />
+                          </span>
+                        ) : (
+                          <>
+                            <span>
                               <TeamAbbr
-                                team={res.winnerAbbrev}
+                                team={s.winnerTeamAbbr}
                                 eliminatedTeams={eliminatedTeams}
                               />{" "}
-                              in {res.gamesPlayed}
-                            </>
-                          ) : (
-                            "pending"
-                          )}
-                        </span>
+                              in {s.gamesPredicted}
+                            </span>
+                            <span className="muted small">Pending</span>
+                          </>
+                        )}
                       </li>
                     );
                   })}

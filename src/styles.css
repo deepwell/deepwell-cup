@@ -19,6 +19,8 @@
   --seg-west: #fb923c;
   --seg-cup: #facc15;
   --seg-muted: #64748b;
+  --pick-correct: #22c55e;
+  --pick-correct-bg: color-mix(in srgb, var(--pick-correct) 24%, transparent);
   font-family:
     system-ui,
     -apple-system,
@@ -45,6 +47,8 @@
   --hover-bg: #dbeafe;
   --bar-bg: #e5ebf5;
   --card-bg: #f8fafc;
+  --pick-correct: #15803d;
+  --pick-correct-bg: color-mix(in srgb, var(--pick-correct) 14%, transparent);
 }
 
 *,
@@ -366,4 +370,31 @@ code {
 
 .pick-list .small {
   grid-column: 1 / -1;
+}
+
+.pick-list .pick-resolution {
+  grid-column: 1 / -1;
+}
+
+.pick-mark-correct {
+  display: inline-block;
+  padding: 0.12em 0.5em;
+  border-radius: 6px;
+  background: var(--pick-correct-bg);
+  border: 1px solid var(--pick-correct);
+  color: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pick-struck {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1em;
+  opacity: 0.72;
+  font-variant-numeric: tabular-nums;
+}
+
+.pick-outcome-plain {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
