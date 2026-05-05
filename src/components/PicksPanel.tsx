@@ -5,6 +5,7 @@ import type {
   SeriesPick,
 } from "../domain/types";
 import { matchupPairKey } from "../domain/matchupKey";
+import { seriesPointsBreakdown } from "../domain/scoring";
 import { normalizeAbbr } from "../domain/teamConference";
 import { PLAYOFF_ROUND_LABEL } from "../uiConstants";
 
@@ -171,20 +172,53 @@ export function PicksPanel({
                       s.matchupTeams[0],
                       s.matchupTeams[1],
                     );
+                    const decided = isSeriesDecided(res);
+                    const breakdown = decided
+                      ? seriesPointsBreakdown(s, res)
+                      : null;
+                    const tooltipId = breakdown
+                      ? `${p.id}-${mk}-series-points-tip`
+                      : undefined;
                     return (
                       <li key={`${p.id}-${mk}`}>
-                        <span className="series-id">
-                          <TeamAbbr
-                            team={teamA}
-                            eliminatedTeams={eliminatedTeams}
-                          />{" "}
-                          vs{" "}
-                          <TeamAbbr
-                            team={teamB}
-                            eliminatedTeams={eliminatedTeams}
-                          />
+                        <span
+                          className={
+                            breakdown
+                              ? "series-id series-id--decided"
+                              : "series-id"
+                          }
+                          tabIndex={breakdown ? 0 : undefined}
+                          aria-describedby={tooltipId}
+                        >
+                          <span className="series-id-matchup">
+                            <TeamAbbr
+                              team={teamA}
+                              eliminatedTeams={eliminatedTeams}
+                            />{" "}
+                            vs{" "}
+                            <TeamAbbr
+                              team={teamB}
+                              eliminatedTeams={eliminatedTeams}
+                            />
+                          </span>
+                          {breakdown && tooltipId ? (
+                            <span
+                              id={tooltipId}
+                              className="series-points-tooltip"
+                              role="tooltip"
+                            >
+                              {breakdown.lines.map((line, i) => (
+                                <span
+                                  key={i}
+                                  className="series-points-tooltip-line"
+                                >
+                                  {line}
+                                </span>
+                              ))}
+                            </span>
+                          ) : null}
                         </span>
-                        {isSeriesDecided(res) ? (
+                        {decided ? (
                           <span className="pick-resolution">
                             <ResolvedPickLine
                               pick={s}

@@ -2,7 +2,9 @@ import {
   type NormalizedPlayoffState,
   type Participant,
   type ParticipantScore,
+  type ResolvedSeries,
   type ScoreSegment,
+  type SeriesPick,
   roundIdToNumber,
 } from "./types";
 import { normalizeAbbr } from "./teamConference";
@@ -14,6 +16,50 @@ function seriesScorePoints(correctTeam: boolean, c: number, p: number): number {
     return 15 - 2 * Math.abs(c - p);
   }
   return c + p - 8;
+}
+
+export interface SeriesPointsBreakdown {
+  points: number;
+  /** Lines shown in the matchup tooltip (plain text). */
+  lines: string[];
+}
+
+/**
+ * Explains series score for a decided matchup (same rules as {@link scoreParticipant}).
+ */
+export function seriesPointsBreakdown(
+  pick: SeriesPick,
+  resolved: ResolvedSeries,
+): SeriesPointsBreakdown | null {
+  if (
+    !resolved.winnerAbbrev ||
+    resolved.gamesPlayed == null ||
+    resolved.gamesPlayed <= 0
+  ) {
+    return null;
+  }
+
+  const c = resolved.gamesPlayed;
+  const p = pick.gamesPredicted;
+  const picked = normalizeAbbr(pick.winnerTeamAbbr);
+  const actual = normalizeAbbr(resolved.winnerAbbrev);
+  const correct = picked === actual;
+  const pts = seriesScorePoints(correct, c, p);
+
+  const lines: string[] = [`Series points: ${pts}`];
+  lines.push(`Games played (C): ${c} · You predicted (P): ${p}`);
+  if (correct) {
+    const gap = Math.abs(c - p);
+    lines.push(
+      `Winner: correct (${picked}). Formula: 15 − 2×|C − P| = 15 − 2×${gap} = ${pts}`,
+    );
+  } else {
+    lines.push(
+      `Winner: wrong (picked ${picked}, actual ${actual}). Formula: C + P − 8 = ${c} + ${p} − 8 = ${pts}`,
+    );
+  }
+
+  return { points: pts, lines };
 }
 
 function roundLabel(round: number): string {
