@@ -81,7 +81,7 @@
           "round": "round2",
           "series": [
             {
-              "winnerTeamAbbr": "BUF",
+              "winnerTeamAbbr": "MTL",
               "gamesPredicted": 5,
               "matchupTeams": [
                 "BUF",
@@ -1311,7 +1311,7 @@
           "round": "round2",
           "series": [
             {
-              "winnerTeamAbbr": "MTL",
+              "winnerTeamAbbr": "BUF",
               "gamesPredicted": 7,
               "matchupTeams": [
                 "BUF",
