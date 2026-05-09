@@ -8,6 +8,7 @@ import { PLAYOFF_SEASON_ID } from "./config";
 import { predictions } from "./data/loadPredictions";
 import type {
   NormalizedPlayoffState,
+  Participant,
   PlayoffRoundId,
   ResolvedSeries,
 } from "./domain/types";
@@ -29,6 +30,24 @@ function uniqueRounds(ids: PlayoffRoundId[]): PlayoffRoundId[] {
   });
 }
 
+/** Latest playoff round (by bracket order) that has at least one series pick. */
+function latestRoundWithPicks(
+  participants: Participant[],
+  tabRounds: PlayoffRoundId[],
+): PlayoffRoundId {
+  const withPicks = uniqueRounds(
+    participants.flatMap((p) =>
+      p.rounds
+        .filter((r) => r.series.length > 0)
+        .map((r) => r.round),
+    ),
+  );
+  if (withPicks.length > 0) {
+    return withPicks[withPicks.length - 1]!;
+  }
+  return tabRounds[0] ?? "round1";
+}
+
 export default function App() {
   const seasonId = predictions.seasonId ?? PLAYOFF_SEASON_ID;
   const [theme, setTheme] = useState<ThemeMode>(() => {
@@ -43,8 +62,8 @@ export default function App() {
     return uniqueRounds(ids);
   }, []);
 
-  const [selectedRound, setSelectedRound] = useState<PlayoffRoundId>(
-    rounds[0] ?? "round1",
+  const [selectedRound, setSelectedRound] = useState<PlayoffRoundId>(() =>
+    latestRoundWithPicks(predictions.participants, rounds),
   );
   const [selectedParticipantIds, setSelectedParticipantIds] = useState(
     () => new Set<string>(),
