@@ -8,45 +8,15 @@ import { PLAYOFF_SEASON_ID } from "./config";
 import { predictions } from "./data/loadPredictions";
 import type {
   NormalizedPlayoffState,
-  Participant,
   PlayoffRoundId,
   ResolvedSeries,
 } from "./domain/types";
 import { matchupPairKey } from "./domain/matchupKey";
 import { scoreAllParticipants } from "./domain/scoring";
 import { normalizeAbbr } from "./domain/teamConference";
+import { latestRoundWithPicks, uniqueRounds } from "./utils/rounds";
 
 type ThemeMode = "dark" | "light";
-
-function uniqueRounds(ids: PlayoffRoundId[]): PlayoffRoundId[] {
-  return Array.from(new Set(ids)).sort((a, b) => {
-    const order: PlayoffRoundId[] = [
-      "round1",
-      "round2",
-      "round3",
-      "round4",
-    ];
-    return order.indexOf(a) - order.indexOf(b);
-  });
-}
-
-/** Latest playoff round (by bracket order) that has at least one series pick. */
-function latestRoundWithPicks(
-  participants: Participant[],
-  tabRounds: PlayoffRoundId[],
-): PlayoffRoundId {
-  const withPicks = uniqueRounds(
-    participants.flatMap((p) =>
-      p.rounds
-        .filter((r) => r.series.length > 0)
-        .map((r) => r.round),
-    ),
-  );
-  if (withPicks.length > 0) {
-    return withPicks[withPicks.length - 1]!;
-  }
-  return tabRounds[0] ?? "round1";
-}
 
 export default function App() {
   const seasonId = predictions.seasonId ?? PLAYOFF_SEASON_ID;
