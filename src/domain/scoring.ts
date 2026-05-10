@@ -79,7 +79,7 @@ function roundLabel(round: number): string {
 
 function championshipCurve(deepestRound: number): number {
   if (deepestRound <= 1) return 0;
-  return 2 * (deepestRound - 1);
+  return 2 ** (deepestRound - 1);
 }
 
 export function scoreParticipant(

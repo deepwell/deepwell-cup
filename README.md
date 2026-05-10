@@ -32,7 +32,7 @@ Deploy with `bun run deploy`. The Worker serves the built `dist` assets and prox
 ## Scoring
 
 - **Series:** correct winner `15 − 2·|C − P|`; wrong winner `C + P − 8` when the series is completed (C = actual games, P = predicted games).
-- **Conference / Cup preseason picks:** `2·(R − 1)` when the picked team’s deepest playoff round **R** is greater than 1, else `0`.
+- **Conference / Cup preseason picks:** `2^(R − 1)` when the picked team’s deepest playoff round **R** is greater than 1, else `0`.
 
 ## Static Data
 
