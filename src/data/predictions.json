@@ -116,7 +116,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 5,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -239,7 +256,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -362,7 +396,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 5,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -485,7 +536,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -608,7 +676,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -731,7 +816,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 5,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -854,7 +956,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 7,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -977,7 +1096,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1100,7 +1236,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 5,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1223,7 +1376,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 7,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 5,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1346,7 +1516,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 5,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1469,7 +1656,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 7,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1592,7 +1796,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 7,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1715,7 +1936,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1838,7 +2076,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "MTL",
+              "gamesPredicted": 7,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -1961,7 +2216,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
@@ -2084,7 +2356,24 @@
         },
         {
           "round": "round3",
-          "series": []
+          "series": [
+            {
+              "winnerTeamAbbr": "CAR",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "CAR",
+                "MTL"
+              ]
+            },
+            {
+              "winnerTeamAbbr": "COL",
+              "gamesPredicted": 6,
+              "matchupTeams": [
+                "COL",
+                "VGK"
+              ]
+            }
+          ]
         },
         {
           "round": "round4",
