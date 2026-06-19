@@ -170,11 +170,19 @@ export function scoreParticipant(
     participant.stanleyCupChampion,
     state.series,
   );
-  const cupPts = championshipCurve(cupDepth);
+  const pickedCupWinner =
+    state.cupWinnerAbbrev != null &&
+    normalizeAbbr(participant.stanleyCupChampion) ===
+      normalizeAbbr(state.cupWinnerAbbrev);
+  const cupPts = pickedCupWinner
+    ? championshipCurve(5)
+    : championshipCurve(cupDepth);
   segments.push({
     kind: "cup",
     points: cupPts,
-    label: `Stanley Cup pick depth (R=${cupDepth})`,
+    label: pickedCupWinner
+      ? "Stanley Cup pick (correct champion)"
+      : `Stanley Cup pick depth (R=${cupDepth})`,
   });
 
   const totalPoints = segments.reduce((sum, s) => sum + s.points, 0);
